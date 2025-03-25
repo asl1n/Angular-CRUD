@@ -1,6 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MeroType } from 'src/app/mero-type';
 import { WorkersService } from 'src/app/service/workers.service';
 
 @Component({
@@ -37,7 +38,7 @@ export class ModalComponent {
 
   meroFormSubmit(){
     if(this.meroForm.valid){
-      this.workerService.addWorker(this.meroForm.value).subscribe({
+      this.workerService.addWorker(this.meroForm.value as MeroType).subscribe({
         next: (val: any) => {
           this.dialogRef.close();
         },

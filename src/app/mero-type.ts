@@ -8,5 +8,5 @@ export interface MeroType {
   education: string;
   company: string;
   experience: number;
-  package: number;
+  salary: number;
 }

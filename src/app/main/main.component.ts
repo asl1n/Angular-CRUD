@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import { WorkersService } from '../service/workers.service';
+import { MeroType } from '../mero-type';
 
 @Component({
   selector: 'app-main',
@@ -7,13 +11,34 @@ import { WorkersService } from '../service/workers.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
+  displayedColumns: string[] = 
+  [
+    'id',
+    'firstName', 
+    'lastName', 
+    'email',
+    'dob',
+    'gender',
+    'education',
+    'company',
+    'experience',
+    'salary'
+  ];
+  dataSource!: MatTableDataSource<MeroType>;
 
-  constructor(private workerService: WorkersService){}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(
+  private workerService: WorkersService
+  ){}
 
   getWorkers(){
     this.workerService.getWorkers().subscribe({
-      next: (val: any) => {
-        console.log(val)
+      next: (val: MeroType[]) => {
+        this.dataSource = new MatTableDataSource(val);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       },
       error: console.log
     })
@@ -21,5 +46,14 @@ export class MainComponent {
 
   ngOnInit(): void {
     this.getWorkers();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }
