@@ -1,5 +1,7 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { WorkersService } from 'src/app/service/workers.service';
 
 @Component({
   selector: 'app-modal',
@@ -17,7 +19,9 @@ export class ModalComponent {
     'Graduated'
   ]
 
-  constructor(private fb : FormBuilder){
+  constructor(private fb : FormBuilder, 
+    private workerService : WorkersService, 
+    private dialogRef : DialogRef<ModalComponent>){
     this.meroForm = this.fb.group({
       firstName: '',
       lastName: '',
@@ -27,12 +31,19 @@ export class ModalComponent {
       education: '',
       company: '',
       experience: '',
-      package: ''
+      salary: ''
     })
   }
 
   meroFormSubmit(){
     if(this.meroForm.valid){
-      console.log(this.meroForm.value);
+      this.workerService.addWorker(this.meroForm.value).subscribe({
+        next: (val: any) => {
+          this.dialogRef.close();
+        },
+        error: (err: any) => {
+          console.log(err);
+        }
+      })
   }};
 }

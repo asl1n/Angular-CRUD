@@ -1,0 +1,16 @@
+{
+  "workers": [
+    {
+      "id": "06f5",
+      "firstName": "Aslin ",
+      "lastName": "Karmacharya",
+      "email": "Test@gmail.com",
+      "dob": "2003-12-25T18:15:00.000Z",
+      "gender": "male",
+      "education": "Higher Secondary Level",
+      "company": "Bentray",
+      "experience": "1",
+      "package": "1000"
+    }
+  ]
+}
