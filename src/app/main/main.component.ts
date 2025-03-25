@@ -49,6 +49,10 @@ export class MainComponent {
     this.getWorkers();
   }
 
+  deleteWorker(id: number){
+    this.workerService.deleteWorker(id).subscribe();
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

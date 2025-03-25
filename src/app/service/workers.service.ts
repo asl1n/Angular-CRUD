@@ -19,4 +19,8 @@ export class WorkersService {
   getWorkers(): Observable<MeroType[]>{
     return this.http.get<MeroType[]>(this.apiUrl);
   }
+
+  deleteWorker(id: number): Observable<MeroType> {
+    return this.http.delete<MeroType>(`${this.apiUrl}/${id}`);
+  }
 }
