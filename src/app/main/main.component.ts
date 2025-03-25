@@ -50,7 +50,12 @@ export class MainComponent {
   }
 
   deleteWorker(id: number){
-    this.workerService.deleteWorker(id).subscribe();
+    this.workerService.deleteWorker(id).subscribe({
+      next: (res) =>{
+        this.getWorkers();
+      },
+      error: console.log
+    });
   }
 
   applyFilter(event: Event) {
