@@ -49,6 +49,14 @@ export class MainComponent {
     this.getWorkers();
   }
 
+  editWorker(id: number, updatedData: Partial<MeroType>){
+    this.workerService.editWorker(id, updatedData).subscribe({
+      next: (res) =>{
+        console.log('edited',res);
+      }
+    });
+  }
+
   deleteWorker(id: number){
     this.workerService.deleteWorker(id).subscribe({
       next: (res) =>{

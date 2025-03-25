@@ -20,6 +20,10 @@ export class WorkersService {
     return this.http.get<MeroType[]>(this.apiUrl);
   }
 
+  editWorker(id: number, updatedData: Partial<MeroType>): Observable<MeroType> {
+    return this.http.patch<MeroType>(`${this.apiUrl}/${id}`, updatedData);
+  }  
+
   deleteWorker(id: number): Observable<MeroType> {
     return this.http.delete<MeroType>(`${this.apiUrl}/${id}`);
   }
