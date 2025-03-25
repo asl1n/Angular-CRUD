@@ -30,4 +30,9 @@ export class ModalComponent {
       package: ''
     })
   }
+
+  meroFormSubmit(){
+    if(this.meroForm.valid){
+      console.log(this.meroForm.value);
+  }};
 }
