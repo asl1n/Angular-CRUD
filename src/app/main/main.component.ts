@@ -22,7 +22,8 @@ export class MainComponent {
     'education',
     'company',
     'experience',
-    'salary'
+    'salary',
+    'actions'
   ];
   dataSource!: MatTableDataSource<MeroType>;
 
