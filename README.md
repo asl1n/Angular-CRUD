@@ -15,6 +15,7 @@ This project is a simple Worker Management Form built with Angular 16 and Angula
 ### Clone the Repository
 
 git clone https://github.com/asl1n/Angular-CRUD.git
+
 cd Angular-CRUD
 
 ### Install Dependencies
