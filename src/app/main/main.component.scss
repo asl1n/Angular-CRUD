@@ -9,14 +9,8 @@
   
     .table-container {
       width: 100%;
-      overflow-x: auto; // Enable horizontal scrolling for table only
-      max-height: 80vh; // Prevent excessive height
-      margin-bottom: 10px; // Space before paginator
-  
-      table {
-        min-width: 800px; // Ensure the table doesn’t shrink too much
-      }
+      overflow-x: auto; 
+      max-height: 80vh;
     }
-
   }
   
