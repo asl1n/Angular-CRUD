@@ -1,8 +1,22 @@
-.main-body{
+.main-body {
     padding-top: 20px;
     max-width: 1248px;
     margin: 0 auto;
-    mat-form-field{
-        width: 100%;
+  
+    mat-form-field {
+      width: 100%;
     }
-}
+  
+    .table-container {
+      width: 100%;
+      overflow-x: auto; // Enable horizontal scrolling for table only
+      max-height: 80vh; // Prevent excessive height
+      margin-bottom: 10px; // Space before paginator
+  
+      table {
+        min-width: 800px; // Ensure the table doesn’t shrink too much
+      }
+    }
+
+  }
+  

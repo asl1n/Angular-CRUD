@@ -4,6 +4,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { WorkersService } from '../service/workers.service';
 import { MeroType } from '../mero-type';
+import { ModalComponent } from '../components/modal/modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-main',
@@ -31,7 +33,8 @@ export class MainComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-  private workerService: WorkersService
+  private workerService: WorkersService,
+  private dialog: MatDialog
   ){}
 
   getWorkers(){
@@ -73,5 +76,11 @@ export class MainComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openEditModal(data: MeroType){
+    this.dialog.open(ModalComponent, {
+      data, 
+    });
   }
 }

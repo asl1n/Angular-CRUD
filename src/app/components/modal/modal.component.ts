@@ -1,6 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { Component } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MeroType } from 'src/app/mero-type';
 import { WorkersService } from 'src/app/service/workers.service';
 
@@ -9,7 +10,7 @@ import { WorkersService } from 'src/app/service/workers.service';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit{
   meroForm: FormGroup;
 
   education: string[]= [
@@ -22,7 +23,9 @@ export class ModalComponent {
 
   constructor(private fb : FormBuilder, 
     private workerService : WorkersService, 
-    private dialogRef : DialogRef<ModalComponent>){
+    private dialogRef : DialogRef<ModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: MeroType 
+  ){
     this.meroForm = this.fb.group({
       firstName: '',
       lastName: '',
@@ -36,15 +39,33 @@ export class ModalComponent {
     })
   }
 
+  ngOnInit(): void {
+      this.meroForm.patchValue(this.data);
+  }
+
   meroFormSubmit(){
     if(this.meroForm.valid){
-      this.workerService.addWorker(this.meroForm.value as MeroType).subscribe({
-        next: (val: any) => {
-          this.dialogRef.close();
-        },
-        error: (err: any) => {
-          console.log(err);
-        }
-      })
+      if(this.data){
+          this.workerService.editWorker(this.data.id, this.meroForm.value as MeroType).subscribe({
+            next: (val: any) => {
+              this.dialogRef.close();
+              location.reload();
+            },
+            error: (err: any) => {
+              console.log(err);
+            }
+          })
+      }
+      else{
+          this.workerService.addWorker(this.meroForm.value as MeroType).subscribe({
+            next: (val: any) => {
+              this.dialogRef.close();
+              location.reload();
+            },
+            error: (err: any) => {
+              console.log(err);
+            }
+          })
+      }
   }};
 }
